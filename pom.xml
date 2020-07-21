@@ -14,6 +14,14 @@
         <spring.version>2.3.1.RELEASE</spring.version>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>jcenter</id>
+            <name>jcenter-bintray</name>
+            <url>https://jcenter.bintray.com</url>
+        </repository>
+    </repositories>
+
 
     <dependencies>
         <dependency>
@@ -55,6 +63,11 @@
                     <artifactId>junit-vintage-engine</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>net.dv8tion</groupId>
+            <artifactId>JDA</artifactId>
+            <version>4.2.0_168</version>
         </dependency>
     </dependencies>
 
@@ -106,7 +119,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>dev.vrba.harold.HaroldApplication</mainClass>
+                            <mainClass>dev.vrba.harold.Application</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

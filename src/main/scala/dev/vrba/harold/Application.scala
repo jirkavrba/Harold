@@ -3,7 +3,7 @@ package dev.vrba.harold
 import org.springframework.boot.{CommandLineRunner, SpringApplication}
 import org.springframework.boot.autoconfigure.SpringBootApplication
 
-object HaroldApplication {
+object Application {
   @SpringBootApplication
   private[this] class HaroldApplication extends CommandLineRunner {
     override def run(args: String*): Unit = {
