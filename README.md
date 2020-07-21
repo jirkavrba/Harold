@@ -1,4 +1,4 @@
-![Harold holding a cup](https://imgur.com/e3ZZpq5.png)
+![Harold holding a cup](https://imgur.com/wovweEt.png)
 
 # Harold bot
 Hiding the pain of managing Discord servers
