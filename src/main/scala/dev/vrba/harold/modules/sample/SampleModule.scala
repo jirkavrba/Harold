@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class SampleModule extends HaroldModule {
-  override def name: String = "Sample module"
+  override val name: String = "Sample module"
 
   override def register(client: JDA): Unit = {
     // Just so it is obvious that the module gets registered...

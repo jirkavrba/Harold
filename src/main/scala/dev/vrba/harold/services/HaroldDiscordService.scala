@@ -13,7 +13,7 @@ class HaroldDiscordService @Autowired()(private val client: JDA, private val mod
 
   def start(): Unit = {
     logger.info("Starting the core Harold service")
-    logger.info(s"You can invite Harold to your Discord server using this link: ${client.getInviteUrl(Permission.ADMINISTRATOR)}");
+    logger.info(s"You can invite Harold to your Discord server using this link: ${client.getInviteUrl(Permission.ADMINISTRATOR)}")
 
     logger.info(s"Found ${modules.length} modules")
 

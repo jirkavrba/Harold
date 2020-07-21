@@ -5,6 +5,6 @@ import org.springframework.stereotype.Component
 
 @Component
 trait HaroldModule {
-  def name: String
+  val name: String
   def register(client: JDA): Unit
 }
