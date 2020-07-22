@@ -4,7 +4,7 @@
 Hiding the pain of managing Discord servers
 
 ---
-![Kotlin](https://img.shields.io/badge/Written%20in-Kotlin-0095D5?style=for-the-badge&logo=kotlin)
+![Kotlin](https://img.shields.io/badge/Written%20in-Kotlin-0095D5?style=for-the-badge)
 ![Travis build status](https://img.shields.io/travis/jirkavrba/harold?style=for-the-badge)
 ![GitHub contributors](https://img.shields.io/github/contributors/jirkavrba/harold?style=for-the-badge&color=green)
 ![GitHub issues](https://img.shields.io/github/issues/jirkavrba/harold?style=for-the-badge&color=green)
