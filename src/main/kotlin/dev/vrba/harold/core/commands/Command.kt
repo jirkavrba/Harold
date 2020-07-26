@@ -8,6 +8,6 @@ interface Command {
     val name: String
     val aliases: List<String>
 
-    // TODO: Add application context or something
+    // TODO: Add application context
     fun execute(event: MessageReceivedEvent): CommandExecutionResult
 }

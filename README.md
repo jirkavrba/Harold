@@ -4,7 +4,7 @@
 Hiding the pain of managing Discord servers
 
 ---
-![Travis build status](https://img.shields.io/travis/jirkavrba/harold?style=for-the-badge)
+![Runs on depression](https://img.shields.io/badge/Runs%20on-Depression-blue?style=for-the-badge)
 ![GitHub contributors](https://img.shields.io/github/contributors/jirkavrba/harold?style=for-the-badge&color=green)
 ![GitHub issues](https://img.shields.io/github/issues/jirkavrba/harold?style=for-the-badge&color=green)
 ![GitHub stars](https://img.shields.io/github/stars/jirkavrba/harold?style=for-the-badge&color=green)
