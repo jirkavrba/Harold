@@ -1,4 +1,4 @@
-package dev.vrba.harold.modules.sample.commands
+package dev.vrba.harold.core.permissions.commands
 
 import dev.vrba.harold.core.commands.Command
 import dev.vrba.harold.core.commands.CommandExecutionResult
@@ -8,17 +8,17 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import org.springframework.stereotype.Component
 
 @Component
-class SampleCommand : Command {
-    override val name = "sample"
+class GrantPermissionCommand : Command {
+    override val name = "grant"
 
-    override val aliases = listOf("samplealias")
+    override val aliases = listOf("allow")
+
+    override val permissions = listOf("acl:manage")
 
     override val scope = CommandScope.GuildsOnly
 
-    override val permissions = emptyList<String>()
-
     override fun execute(event: MessageReceivedEvent): CommandExecutionResult {
-        event.channel.sendMessage("Executed the sample command")
+        event.channel.sendMessage("TODO: Create & store permission grant with given parameters.")
         return Success
     }
 }
