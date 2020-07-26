@@ -14,13 +14,6 @@ class CommandsRepository @Autowired constructor(private val commands: Array<Comm
         }
     }
 
-    fun findCommandsByName(search: String, fuzzy: Boolean = false): List<Command> {
-        return this.commands.filter {
-            if (fuzzy) it.name.contains(search) || it.aliases.any { alias -> alias.contains(search) }
-            else it.name == search || it.aliases.contains(search)
-        }
-    }
-
     fun findCommandsSimilarTo(search: String, threshold: Int = 3): List<Command> {
         return this.commands
                 .map { it to lowestLevenshteinDistance(search, it)}
