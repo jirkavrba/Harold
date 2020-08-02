@@ -1,12 +1,8 @@
 package dev.vrba.harold.core.commands
 
-import dev.vrba.harold.core.commands.CommandExecutionResult.Failure
-import dev.vrba.harold.core.commands.CommandExecutionResult.Success
-import dev.vrba.harold.core.commands.CommandScope.DirectMessagesOnly
-import dev.vrba.harold.core.permissions.PermissionTarget.Role
-import dev.vrba.harold.core.permissions.PermissionTarget.User
-import dev.vrba.harold.core.permissions.repositories.PermissionDenialsRepository
-import dev.vrba.harold.core.permissions.repositories.PermissionGrantsRepository
+import dev.vrba.harold.core.commands.CommandExecutionResult.*
+import dev.vrba.harold.core.commands.CommandScope.*
+import dev.vrba.harold.core.permissions.PermissionsResolver
 import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
@@ -18,8 +14,7 @@ import java.awt.Color
 @Service
 class CommandsHandler @Autowired constructor(
         private val commandsRepository: CommandsRepository,
-        private val permissionsGrantRepository: PermissionGrantsRepository,
-        private val permissionsDenialsRepository: PermissionDenialsRepository
+        private val permissionsResolver: PermissionsResolver
 ) : ListenerAdapter() {
 
     private enum class PrefixSearchPolicy {
@@ -76,9 +71,9 @@ class CommandsHandler @Autowired constructor(
 
         // Check command scope in which it can be executed
         return when (command.scope) {
-            CommandScope.DirectMessagesOnly -> !event.isFromGuild
-            CommandScope.GuildsOnly -> event.isFromGuild
-            CommandScope.Everywhere -> true
+            DirectMessagesOnly -> !event.isFromGuild
+            GuildsOnly -> event.isFromGuild
+            Everywhere -> true
         }
     }
 
@@ -93,32 +88,8 @@ class CommandsHandler @Autowired constructor(
         if (member.hasPermission(Permission.MANAGE_SERVER))
             return true
 
-        // Permission denial has a higher priority so it is resolved earlier
-        val denials = this.permissionsDenialsRepository.findByPermissionInAndGuild(command.permissions, event.guild.idLong)
-        val denied = denials.any {
-            return when (it.type) {
-                Role -> member.roles.any { role -> role.idLong == it.targetId }
-                User -> member.idLong == it.targetId
-            }
-        }
-
-        if (denied) {
-            // TODO: Report denied command triggers?
-            return false
-        }
-
-        val grants = this.permissionsGrantRepository.findByPermissionInAndGuild(command.permissions, event.guild.idLong)
-        val appliedGrants = grants.filter {
-            return when (it.type) {
-                Role -> member.roles.any { role -> role.idLong == it.targetId }
-                User -> member.idLong == it.targetId
-            }
-        }
-                .map { it.permission }
-                .toSet()
-
-        // User has all required permissions
-        return appliedGrants.containsAll(command.permissions)
+        // Otherwise resolve the ACL
+        return this.permissionsResolver.isEligibleToExecute(member, command)
     }
 
     private fun sendCommandNotFoundError(name: String, event: MessageReceivedEvent) {
